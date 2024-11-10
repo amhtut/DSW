@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Customer Information</h1>
+    <form id="customerForm">
+        <label for="customerName">Name:</label>
+        <input type="text" id="customerName" required><br>
+
+        <label for="customerPhone">Phone:</label>
+        <input type="tel" id="customerPhone" required pattern="(\d{9}|\d{11})" title="Please enter a valid phone number (9 or 11 digits)." oninput="validatePhone(this)" /><br>
+
+        <label for="shopName">Shop Name:</label>
+        <input type="text" id="shopName" required><br>
+
+        <button type="button" onclick="continueToProducts()">Continue</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>

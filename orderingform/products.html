@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Products</h1>
+    <div id="product-container">
+        <div id="product-list">
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product A">
+                <div class="product-info">
+                    <h2>Product A</h2>
+                    <p>Price: $10</p>
+                    <input type="number" min="1" placeholder="Quantity" id="quantityA">
+                    <button onclick="addToCart('Product A', 10, document.getElementById('quantityA').value)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product B">
+                <div class="product-info">
+                    <h2>Product B</h2>
+                    <p>Price: $15</p>
+                    <input type="number" min="1" placeholder="Quantity" id="quantityB">
+                    <button onclick="addToCart('Product B', 15, document.getElementById('quantityB').value)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/150" alt="Product C">
+                <div class="product-info">
+                    <h2>Product C</h2>
+                    <p>Price: $20</p>
+                    <input type="number" min="1" placeholder="Quantity" id="quantityC">
+                    <button onclick="addToCart('Product C', 20, document.getElementById('quantityC').value)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div id="cart">
+            <h2>Cart</h2>
+            <ul id="cart-items"></ul>
+            <strong>Grand Total: $<span id="totalPrice">0</span></strong><br>
+            <button onclick="goToCart()">Order Now</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

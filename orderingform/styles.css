@@ -1,0 +1,217 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7; /* Light background color */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 20px 0;
+    color: black; /* Primary color */
+}
+
+p {
+    font-size: 1.8rem;
+    margin: 15px 0;
+    text-align: center;
+    color: rgb(65, 63, 63); /* Primary color */
+}
+form {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/*Customer info box */
+input[type="text"],
+input[type="tel"],
+input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+#product-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#product-list {
+    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; /* Space between product items */
+}
+
+.product-item {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product-item:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.product-item img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.product-info h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+.product-info p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+    color: #666;
+}
+
+input[type="number"] {
+    width:  60%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+button {
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Cart Styles */
+#cart {
+    width: 25%;
+    padding: 20px;
+    border: 1px solid #d1d1d6;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#cartbox {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#cart-items li:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+#cart-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between table cells */
+}
+
+#cart-table th, #cart-table td {
+    padding: 15px;
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #eee; /* Bottom border for rows */
+}
+
+#cart-table th {
+    background-color: #f2f2f2; /* Header background color */
+    font-weight: bold; /* Bold header text */
+}
+
+.cart-summary {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+strong {
+    align-items: right;
+    font-size: 1.5rem;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Confirmation page */
+.confirmation {
+
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Smaller heading size on mobile */
+    }
+
+    #cartbox {
+        padding: 15px; /* Less padding on mobile */
+    }
+
+    #cart-table th, #cart-table td {
+        padding: 10px; /* Less padding for table cells on mobile */
+    }
+
+    button {
+        width: 100%; /* Full width button on mobile */
+        margin-top : 10px; /* Space above button */
+    }
+}
+
