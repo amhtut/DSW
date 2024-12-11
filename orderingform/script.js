@@ -173,7 +173,13 @@ function submitOrderToSheet() {
     };
 
     fetch(url, options)
-        .then(response => response.text())
+        .then(response => {
+            // Check the response status
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
         .then(result => {
             alert('Your order has been submitted!');
             localStorage.clear();
