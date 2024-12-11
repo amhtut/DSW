@@ -180,9 +180,10 @@ strong {
 }
 
 button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
+    background-color: #0056b3; /* Darker shade on hover */
+    cursor: pointer;
 }
+
 
 /* Confirmation page */
 .confirmation {
@@ -213,5 +214,16 @@ button:hover {
         width: 100%; /* Full width button on mobile */
         margin-top : 10px; /* Space above button */
     }
-}
 
+    .container {
+        padding: 10px;
+    }
+
+    #product-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .product-item {
+        padding: 15px;
+    }
+}

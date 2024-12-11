@@ -1,9 +1,9 @@
 let cart = [];
 
 function validatePhone(input) {
-    const phonePattern = /^(?:\d{9}|\d{11})$/; // Regex for 9 or 11-digit phone numbers
+    const phonePattern = /^\d{9,11}$/; // Simplified regex for 9 or 11 digits
     if (!phonePattern.test(input.value)) {
-        input.setCustomValidity("Please enter a valid phone number (9 or 11 digits)."); // Custom validation message
+        input.setCustomValidity("Please enter a valid phone number (9 or 11 digits).");
     } else {
         input.setCustomValidity(""); // Clear the error message
     }
@@ -13,6 +13,9 @@ function continueToProducts() {
     const customerName = document.getElementById('customerName').value;
     const customerPhone = document.getElementById('customerPhone');
     const shopName = document.getElementById('shopName').value;
+
+    // Validate phone number
+    validatePhone(customerPhone);
 
     // Check if all fields are filled and if the phone number is valid
     if (customerName && customerPhone.checkValidity() && shopName) {
@@ -24,6 +27,7 @@ function continueToProducts() {
         alert('Please fill in all fields correctly, including a valid phone number.');
     }
 }
+
 
 // Function to add items to the cart
 function addToCart(productName, productPrice, quantity) {
@@ -79,18 +83,20 @@ function updateCart() {
 function updateQuantity(index, newQuantity) {
     newQuantity = parseInt(newQuantity);
     if (newQuantity > 0) {
-        cart[index].quantity = newQuantity; // Update the quantity
+        cart[index].quantity = newQuantity;
         updateCart(); // Refresh the cart display
     } else {
         alert('Please enter a valid quantity.');
     }
 }
 
+
 // Function to remove an item from the cart
 function removeFromCart(index) {
     cart.splice(index, 1);
-    updateCart();
+    updateCart(); // Refresh cart display after removal
 }
+
 
 // Function to navigate to the cart page
 function goToCart() {
@@ -133,6 +139,48 @@ function updateOverallTotal() {
         grandTotal += parseFloat(cell.innerText.replace('$', '')); // Sum up total values
     });
 
-    document.getElementById('totalPrice').innerText = grandtotal.toFixed(2); // Update overall total
+    document.getElementById('totalPrice').innerText = grandTotal.toFixed(2); // Update overall total
 }
 
+function submitOrderToSheet() {
+    // Collect customer data and cart details
+    const customerName = localStorage.getItem('customerName');
+    const customerPhone = localStorage.getItem('customerPhone');
+    const shopName = localStorage.getItem('shopName');
+    const cart = JSON.parse(localStorage.getItem('cart'));
+
+    // Prepare product data and total
+    let orderDetails = {};
+    let totalPrice = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        const product = cart[i];
+        orderDetails[`product${i + 1}`] = product.quantity;
+        totalPrice += product.quantity * product.price;
+    }
+
+    orderDetails.name = customerName;
+    orderDetails.phone = customerPhone;
+    orderDetails.shop = shopName;
+    orderDetails.total = totalPrice;
+
+    // Send data to Google Sheets via POST request
+    const url = 'https://script.google.com/macros/s/AKfycbyFLXhNNR31Tuo4DIeO045gYt1O4WJKacHzZrRC4HkXNHqlbk63hmsShvNhBRtesFA0/exec';
+    const options = {
+        method: 'POST',
+        contentType: 'application/json',
+        payload: JSON.stringify(orderDetails)
+    };
+
+    fetch(url, options)
+        .then(response => response.text())
+        .then(result => {
+            alert('Your order has been submitted!');
+            localStorage.clear();
+            window.location.href = 'confirmation.html';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your order. Please try again.');
+        });
+}
