@@ -90,13 +90,11 @@ function updateQuantity(index, newQuantity) {
     }
 }
 
-
 // Function to remove an item from the cart
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCart(); // Refresh cart display after removal
 }
-
 
 // Function to navigate to the cart page
 function goToCart() {
@@ -147,7 +145,7 @@ function submitOrderToSheet() {
     const customerName = localStorage.getItem('customerName');
     const customerPhone = localStorage.getItem('customerPhone');
     const shopName = localStorage.getItem('shopName');
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Prepare product data and total
     let orderDetails = {};
@@ -159,6 +157,7 @@ function submitOrderToSheet() {
         totalPrice += product.quantity * product.price;
     }
 
+    // Add customer and total information to the orderDetails object
     orderDetails.name = customerName;
     orderDetails.phone = customerPhone;
     orderDetails.shop = shopName;
@@ -166,27 +165,25 @@ function submitOrderToSheet() {
 
     // Send data to Google Sheets via POST request
     const url = 'https://script.google.com/macros/s/AKfycbyFLXhNNR31Tuo4DIeO045gYt1O4WJKacHzZrRC4HkXNHqlbk63hmsShvNhBRtesFA0/exec';
-    const options = {
+    
+    fetch(url, {
         method: 'POST',
-        contentType: 'application/json',
-        payload: JSON.stringify(orderDetails)
-    };
-
-    fetch(url, options)
-        .then(response => {
-            // Check the response status
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(result => {
-            alert('Your order has been submitted!');
-            localStorage.clear();
-            window.location.href = 'confirmation.html';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error submitting your order. Please try again.');
-        });
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderDetails)
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data === "Success") {
+            alert('Order submitted successfully!');
+            window.location.href = 'confirmation.html'; // Redirect after successful order submission
+        } else {
+            alert('Error submitting order: ' + data);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your order. Please try again.');
+    });
 }
