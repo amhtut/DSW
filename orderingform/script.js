@@ -164,7 +164,7 @@ function submitOrderToSheet() {
     orderDetails.total = totalPrice;
 
     // Send data to Google Sheets via POST request
-    const url = 'https://script.google.com/macros/s/AKfycbyFLXhNNR31Tuo4DIeO045gYt1O4WJKacHzZrRC4HkXNHqlbk63hmsShvNhBRtesFA0/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbwj3vpwc2hZvzhYOeDzB5tV719Xt9bQEN8bc07AY9kzz0OrLtkyb6jKokYQGvBz1Bjr/exec';
     
     fetch(url, {
         method: 'POST',
